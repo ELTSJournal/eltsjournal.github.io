@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Forwarding to e-Journal of ELTS...</title>
   
-  <link rel="icon" type="image/png" href="https://googleusercontent.com/profile/picture/0">
+  <link rel="icon" type="image/png" href="https://lh3.googleusercontent.com/d/1DFe5cEnERQ2qhUl8zHS27wG_fzZS1Mxg">
   
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=Georgia:ital,wght=0,400;0,700;1,400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -161,7 +161,7 @@
 <body>
 
   <div class="redirect-container">
-    <img src="https://googleusercontent.com/profile/picture/0" alt="ELTS Logo" class="journal-logo">
+    <img src="https://lh3.googleusercontent.com/d/1DFe5cEnERQ2qhUl8zHS27wG_fzZS1Mxg" alt="ELTS Logo" class="journal-logo">
     
     <div class="title">e-Journal of ELTS</div>
     <div class="subtitle">Official Gateway Routing</div>
@@ -185,3 +185,14 @@
     const ticker = document.getElementById("ticker-text");
 
     // Dynamic text changes to make the wait
+    setTimeout(() => { ticker.innerText = "RESOLVING HOST DOMAIN METRICS..."; }, 800);
+    setTimeout(() => { ticker.innerText = "AUTHORIZING SECURE TRANSIT PROTOCOL..."; }, 1600);
+    setTimeout(() => { ticker.innerText = "HANDOFF COMPLETE. REDIRECTING..."; }, 2400);
+
+    // Final execution redirect after exactly 3 seconds
+    setTimeout(() => {
+      window.location.replace(TARGET_URL);
+    }, 3000);
+  </script>
+</body>
+</html>
