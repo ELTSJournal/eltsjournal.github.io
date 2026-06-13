@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ELTS Document Verification Portal</title>
+  
+  <link rel="icon" type="image/png" href="https://lh3.googleusercontent.com/d/1DFe5cEnERQ2qhUl8zHS27wG_fzZS1Mxg">
+  
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght=400;500;600;700&family=Georgia:ital,wght=0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <style>
+    :root {
+      --elts-space-dark: #07121e;    
+      --elts-panel-dark: #0d1b2a;   
+      --elts-card-dark: #1b263b;    
+      --elts-blue: #1c74e8;         
+      --elts-blue-glow: rgba(28, 116, 232, 0.15);
+      --success-green: #34d399;
+      --success-bg: rgba(52, 211, 153, 0.1);
+      --danger-red: #f87171;
+      --danger-bg: rgba(248, 113, 113, 0.1);
+      --text-main: #f4f7fc;
+      --text-muted: #94a3b8;
+      --border-color: #1e293b;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'IBM Plex Sans', sans-serif; background-color: var(--elts-space-dark); color: var(--text-main); padding: 10px 5px; }
+    .gateway-wrapper { max-width: 900px; margin: 0 auto; background: var(--elts-panel-dark); border-radius: 12px; box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5), 0 0 0 1px var(--border-color); overflow: hidden; }
+    .gateway-header { background: linear-gradient(135deg, #091727 0%, #0d1b2a 100%); padding: 25px 30px; color: #ffffff; display: flex; justify-content: space-between; align-items: center; border-bottom: 3px solid var(--elts-blue); }
+    .header-left { display: flex; align-items: center; gap: 18px; }
+    
+    /* JOURNAL LOGO STYLING */
+    .journal-logo-img { height: 3.2rem; width: auto; object-fit: contain; display: block; }
+    
+    .header-titles { display: flex; flex-direction: column; text-align: left; }
+    .journal-title { font-family: 'Georgia', serif; font-size: 1.6rem; font-weight: bold; letter-spacing: 0.5px; }
+    .system-subtitle { font-size: 0.85rem; color: var(--text-muted); margin-top: 4px; font-weight: 500; text-transform: uppercase; letter-spacing: 1px; }
+    .security-badge { background: rgba(28, 116, 232, 0.1); color: #60a5fa; padding: 8px 15px; border-radius: 6px; font-size: 0.85rem; font-weight: 600; border: 1px solid rgba(28, 116, 232, 0.2); display: flex; align-items: center; gap: 8px; }
+    .portal-notice-bar { background: rgba(0, 0, 0, 0.2); padding: 18px 30px; border-bottom: 1px solid var(--border-color); text-align: center; font-size: 0.95rem; color: #e2e8f0; display: flex; align-items: center; justify-content: center; gap: 12px; }
+    .portal-notice-bar i { color: var(--elts-blue); font-size: 1.1rem; }
+    .portal-body { padding: 40px 30px; text-align: center; min-height: 400px; }
+    .badge { display: inline-flex; align-items: center; gap: 10px; padding: 12px 24px; border-radius: 6px; font-weight: 700; font-size: 1rem; margin-bottom: 30px; }
+    .badge-valid { background-color: var(--success-bg); color: var(--success-green); border: 1px solid rgba(52, 211, 153, 0.2); }
+    .badge-invalid { background-color: var(--danger-bg); color: var(--danger-red); border: 1px solid rgba(248, 113, 113, 0.2); }
+    .meta-card { background: var(--elts-card-dark); border: 1px solid var(--border-color); border-radius: 8px; padding: 25px; margin-bottom: 30px; text-align: left; border-top: 4px solid var(--elts-blue); box-shadow: 0 10px 20px rgba(0,0,0,0.2); }
+    .meta-grid { display: grid; grid-template-columns: 150px 1fr; row-gap: 14px; font-size: 0.95rem; line-height: 1.5; }
+    .meta-label { font-weight: 600; color: var(--text-muted); }
+    .meta-value { color: var(--text-main); }
+    .preview-header { font-family: Georgia, serif; font-size: 1.1rem; color: #60a5fa; text-align: left; margin-bottom: 12px; font-weight: bold; display: flex; align-items: center; gap: 8px; }
+    .preview-container { position: relative; width: 100%; height: 620px; border: 1px solid var(--border-color); border-radius: 8px; overflow: hidden; background: #040a12; }
+    .preview-frame { width: 100%; height: 100%; border: none; }
+    .preview-shield { position: absolute; top: 0; right: 0; width: 65px; height: 55px; background: transparent; z-index: 9999; cursor: not-allowed; }
+    .btn-report { display: inline-flex; align-items: center; gap: 8px; background-color: #dc2626; color: #ffffff; text-decoration: none; padding: 12px 24px; font-weight: bold; border-radius: 6px; font-size: 0.9rem; margin-top: 15px; border: none; cursor: pointer; }
+    .info-text { color: var(--text-muted); font-size: 0.95rem; max-width: 550px; margin: 0 auto 20px; }
+    .missing-box { padding: 20px; border: 1px dashed var(--danger-red); border-radius: 6px; background-color: var(--danger-bg); text-align: left; margin-top: 15px; }
+    .radar-matrix { position: relative; width: 160px; height: 160px; margin: 20px auto 25px; border-radius: 50%; background: radial-gradient(circle, var(--elts-blue-glow) 0%, rgba(255,255,255,0) 70%); display: flex; align-items: center; justify-content: center; }
+    .radar-ring { position: absolute; border: 1px dashed rgba(28, 116, 232, 0.3); border-radius: 50%; animation: rotateRing 20s linear infinite; }
+    .radar-ring-inner { width: 100px; height: 100px; border-style: dotted; animation-duration: 10s; animation-direction: reverse; }
+    .radar-ring-outer { width: 150px; height: 150px; }
+    .radar-sweep { position: absolute; width: 100%; height: 100%; border-radius: 50%; background: conic-gradient(from 0deg at 50% 50%, rgba(28, 116, 232, 0.2) 0deg, rgba(255,255,255,0) 180deg); animation: sweep 3s linear infinite; }
+    .radar-center-icon { font-size: 2.5rem; color: var(--elts-blue); z-index: 2; text-shadow: 0 0 15px rgba(28, 116, 232, 0.6); animation: pulsePulse 2s ease-in-out infinite; }
+    .system-status-log { font-family: monospace; font-size: 0.8rem; color: #34d399; background: #040a12; padding: 15px; border-radius: 6px; display: inline-block; max-width: 450px; text-align: left; margin-top: 20px; border-left: 4px solid var(--elts-blue); width: 100%; }
+    #view-loading { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 50px 20px; }
+    .spinner-shield { position: relative; width: 90px; height: 90px; display: flex; align-items: center; justify-content: center; }
+    .spinner-outer { position: absolute; width: 80px; height: 80px; border: 4px solid var(--border-color); border-top: 4px solid var(--elts-blue); border-radius: 50%; animation: spin 1s linear infinite; }
+    .spinner-inner { position: absolute; width: 50px; height: 50px; border: 3px solid transparent; border-top: 3px solid var(--success-green); border-bottom: 3px solid var(--success-green); border-radius: 50%; animation: spinReverse 1.5s linear infinite; }
+    .spinner-icon { font-size: 1.5rem; color: var(--elts-blue); animation: pulsePulse 1s ease-in-out infinite; }
+    .loading-status-ticker { font-family: monospace; font-weight: bold; color: var(--text-main); font-size: 0.9rem; margin-top: 25px; letter-spacing: 1px; }
+    .gateway-footer { background: rgba(0,0,0,0.15); padding: 18px; text-align: center; font-size: 0.8rem; color: var(--text-muted); border-top: 1px solid var(--border-color); font-weight: 500; }
+
+    @keyframes rotateRing { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+    @keyframes sweep { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+    @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+    @keyframes spinReverse { 0% { transform: rotate(360deg); } 100% { transform: rotate(0deg); } }
+    @keyframes pulsePulse { 0%, 100% { transform: scale(1); opacity: 1; } 50% { transform: scale(0.9); opacity: 0.7; } }
+  </style>
+</head>
+<body>
+
+  <div class="gateway-wrapper">
+    <div class="gateway-header">
+      <div class="header-left">
+        <img src="https://lh3.googleusercontent.com/d/1DFe5cEnERQ2qhUl8zHS27wG_fzZS1Mxg" alt="ELTS Logo" class="journal-logo-img">
+        <div class="header-titles">
+          <div class="journal-title">e-Journal of ELTS</div>
+          <div class="system-subtitle">Cryptographic Document Ledger & Verification Gateway</div>
+        </div>
+      </div>
+      <div class="security-badge"><i class="fas fa-shield-check"></i>Encrypted Core</div>
+    </div>
+
+    <div class="portal-notice-bar">
+      <i class="fas fa-qrcode"></i>
+      <span>Official document QR code scan is required to initiate the verification protocol.</span>
+    </div>
+
+    <div class="portal-body">
+      
+      <div id="view-standby">
+        <div class="radar-matrix">
+          <div class="radar-sweep"></div>
+          <div class="radar-ring radar-ring-outer"></div>
+          <div class="radar-ring radar-ring-inner"></div>
+          <i class="fas fa-shield-halved radar-center-icon"></i>
+        </div>
+        <p style="font-weight: 700; color: #ffffff; font-size: 1.2rem; margin-bottom: 5px;">Awaiting Verification Payload</p>
+        <p class="info-text">Scan an official document QR token to pass dynamic identity metrics and authorize ledger decryption rules.</p>
+        <div class="system-status-log">
+          <span style="color:#64748b;">[SYSTEM_LOG]</span> Connection: DIRECT SHEET ENGINE ACTIVE<br>
+          <span style="color:#64748b;">[SYSTEM_LOG]</span> Node Status: ONLINE (GVIZ-STREAM)<br>
+          <span style="color:#64748b;">[SYSTEM_LOG]</span> Ledger: Standby for inbound decryption vector..._
+        </div>
+      </div>
+
+      <div id="view-loading" style="display: none;">
+        <div class="spinner-shield">
+          <div class="spinner-outer"></div>
+          <div class="spinner-inner"></div>
+          <i class="fas fa-shield-halved spinner-icon"></i>
+        </div>
+        <div id="statusTickerText" class="loading-status-ticker">INITIALIZING CRYPTO AUTHENTICATION MATRIX...</div>
+      </div>
+
+      <div id="view-valid" style="display: none;">
+        <div class="badge badge-valid"><i class="fas fa-check-circle" style="font-size: 1.2rem;"></i> VERIFIED OFFICIAL DOCUMENT</div>
+        <div class="meta-card">
+          <div class="meta-grid">
+            <div class="meta-label">Document Type</div><div id="lbl-doctype" class="meta-value" style="font-weight: bold; color: #60a5fa;"></div>
+            <div class="meta-label">Reference Number</div><div id="lbl-refnum" class="meta-value" style="font-weight: 600; color: #f4f7fc;"></div>
+            <div class="meta-label">Article Title</div><div id="lbl-title" class="meta-value" style="font-style: italic; color: #ffffff;"></div>
+            <div class="meta-label">Author(s)</div><div id="lbl-authors" class="meta-value"></div>
+            <div class="meta-label">Issued Date</div><div id="lbl-date" class="meta-value" style="font-family: monospace; color: #a7f3d0;"></div>
+          </div>
+        </div>
+        <div id="pdf-preview-block" style="display: none;">
+          <div class="preview-header"><i class="fas fa-file-pdf" style="color: var(--danger-red);"></i> Central Ledger Digital Twin Mirror</div>
+          <div class="preview-container">
+            <div class="preview-shield" title="System Integrity: Downloads locked."></div>
+            <iframe id="preview-iframe" class="preview-frame" src="" allow="autoplay"></iframe>
+          </div>
+        </div>
+        <div id="pdf-missing-block" class="missing-box" style="display: none;">
+          <p style="color: var(--danger-red); margin: 0; font-weight: 600;"><i class="fas fa-clock"></i> Document Archive Delay</p>
+          <p style="font-size: 0.9rem; color: var(--text-muted); margin: 5px 0 0 0;">The data record is fully authentic, but the high-resolution digital twin mirror is currently indexing or undergoing system archiving. Please verify identity metrics via the metadata ledger card above.</p>
+        </div>
+      </div>
+
+      <div id="view-invalid" style="display: none;">
+        <div class="badge badge-invalid"><i class="fas fa-exclamation-triangle" style="font-size: 1.2rem;"></i> FORGERY RISK: DOCUMENT NOT FOUND</div>
+        <p class="info-text" style="font-weight: 500;">The reference token provided does not match any authenticated record inside our central administrative registry.</p>
+        <a href="mailto:elts.journal@gmail.com?subject=REPORT: Forgery Alert" class="btn-report"><i class="fas fa-shield-alt"></i> Report Suspected Forgery</a>
+      </div>
+
+    </div>
+    <div class="gateway-footer">Operated by the IT Department of ELTS e-Journal | Tadulako University | Authorized Access Only</div>
+  </div>
+
+  <!-- NATIVE GOOGLE VISUALIZATION DATA ENGINE -->
+  <script>
+    const SPREADSHEET_ID = "11ZXjKTBanFX-nR_L4mVSNZ9uB_Vw3EGxmpsKIObdecI";
+    const QUERY_URL = `https://docs.google.com/spreadsheets/d/${SPREADSHEET_ID}/gviz/tq?tqx=out:json`;
+
+    // Clean initialization: No root redirects here!
+    window.addEventListener("DOMContentLoaded", function() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const docId = urlParams.get('doc_id');
+
+      if (!docId || docId.trim() === "") {
+        switchView("standby"); // Safely displays your standby radar screen
+      } else {
+        executeDirectLookup(docId.trim());
+      }
+    });
+
+    function executeDirectLookup(targetId) {
+      switchView("loading");
+      runTextTickerAnimation();
+
+      fetch(QUERY_URL)
+        .then(response => {
+          if (!response.ok) throw new Error("Network response error");
+          return response.text();
+        })
+        .then(responseText => {
+          const startIdx = responseText.indexOf("({") + 1;
+          const endIdx = responseText.lastIndexOf("})") + 1;
+          const rawJson = JSON.parse(responseText.slice(startIdx, endIdx));
+          
+          const rows = rawJson.table.rows;
+          const cols = rawJson.table.cols.map(c => c.label ? c.label.trim() : "");
+          
+          const idxVerifyId    = cols.indexOf('Verification ID');
+          const idxDocType     = cols.indexOf('Document Type');
+          const idxRefNum      = cols.indexOf('Reference Number'); 
+          const idxManuscript  = cols.indexOf('Manuscript Title');
+          const idxAuthorName  = cols.indexOf('Author Name');
+          const idxTimestamp   = cols.indexOf('Timestamp');
+          const idxDriveFileId = cols.indexOf('Drive File ID');
+
+          if (idxVerifyId === -1) {
+            console.error("Critical error: 'Verification ID' column header missing.");
+            switchView("invalid");
+            return;
+          }
+
+          let matchedRow = null;
+          for (let row of rows) {
+            if (row.c && row.c[idxVerifyId]) {
+              const cellValue = row.c[idxVerifyId].v;
+              if (cellValue && cellValue.toString().trim() === targetId) {
+                matchedRow = row.c;
+                break;
+              }
+            }
+          }
+
+          if (matchedRow) {
+            const docType  = matchedRow[idxDocType] ? matchedRow[idxDocType].v : "Unspecified Document";
+            const refNum   = matchedRow[idxRefNum] ? matchedRow[idxRefNum].v : "N/A";
+            const title    = matchedRow[idxManuscript] ? matchedRow[idxManuscript].v : "No Title Available";
+            const authors  = matchedRow[idxAuthorName] ? matchedRow[idxAuthorName].v : "Anonymous Author";
+            const rawDate  = matchedRow[idxTimestamp] ? matchedRow[idxTimestamp].f || matchedRow[idxTimestamp].v : "N/A";
+            const fileId   = matchedRow[idxDriveFileId] ? matchedRow[idxDriveFileId].v : "";
+
+            document.getElementById("lbl-doctype").innerText = docType;
+            document.getElementById("lbl-refnum").innerText = refNum;
+            document.getElementById("lbl-title").innerText = title;
+            document.getElementById("lbl-authors").innerText = authors;
+            document.getElementById("lbl-date").innerText = rawDate;
+
+            if (fileId && fileId.trim() !== "") {
+              document.getElementById("preview-iframe").src = "https://docs.google.com/file/d/" + fileId.trim() + "/preview";
+              document.getElementById("pdf-preview-block").style.display = "block";
+              document.getElementById("pdf-missing-block").style.display = "none";
+            } else {
+              document.getElementById("pdf-preview-block").style.display = "none";
+              document.getElementById("pdf-missing-block").style.display = "block";
+            }
+            switchView("valid");
+          } else {
+            switchView("invalid");
+          }
+        })
+        .catch(err => {
+          console.error("Direct Ledger Engine Error: ", err);
+          switchView("invalid");
+        });
+    }
+
+    function switchView(target) {
+      document.getElementById("view-standby").style.display = (target === "standby") ? "block" : "none";
+      document.getElementById("view-loading").style.display = (target === "loading") ? "flex" : "none";
+      document.getElementById("view-valid").style.display = (target === "valid") ? "block" : "none";
+      document.getElementById("view-invalid").style.display = (target === "invalid") ? "block" : "none";
+    }
+
+    function runTextTickerAnimation() {
+      const statusText = document.getElementById("statusTickerText");
+      const steps = [
+        { time: 0, text: "INITIALIZING CRYPTO AUTHENTICATION MATRIX..." },
+        { time: 350, text: "CONNECTING TO ELTS CENTRAL LEDGER..." },
+        { time: 700, text: "MATCHING DIGITAL SIGNATURES..." },
+        { time: 1050, text: "DECRYPTING SECURE TWIN MIRROR STREAM..." }
+      ];
+      steps.forEach(function(step) {
+        setTimeout(function() { if (statusText) statusText.innerText = step.text; }, step.time);
+      });
+    }
+  </script>
+</body>
+</html>
