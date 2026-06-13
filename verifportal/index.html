@@ -261,9 +261,9 @@
       const statusText = document.getElementById("statusTickerText");
       const steps = [
         { time: 0, text: "INITIALIZING CRYPTO AUTHENTICATION MATRIX..." },
-        { time: 350, text: "CONNECTING TO ELTS CENTRAL LEDGER..." },
-        { time: 700, text: "MATCHING DIGITAL SIGNATURES..." },
-        { time: 1050, text: "DECRYPTING SECURE TWIN MIRROR STREAM..." }
+        { time: 250, text: "CONNECTING TO ELTS CENTRAL LEDGER..." },
+        { time: 500, text: "MATCHING DIGITAL SIGNATURES..." },
+        { time: 750, text: "DECRYPTING SECURE TWIN MIRROR STREAM..." }
       ];
       steps.forEach(function(step) {
         setTimeout(function() { if (statusText) statusText.innerText = step.text; }, step.time);
