@@ -16,7 +16,7 @@
 
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
-            background-color: #05070f;
+            background-color: #04060d;
             color: #ffffff;
             min-height: 100vh;
             display: flex;
@@ -41,48 +41,51 @@
         .abstract-orb {
             position: absolute;
             border-radius: 50%;
-            filter: blur(120px);
-            opacity: 0.35;
+            filter: blur(130px);
+            opacity: 0.3;
             mix-blend-mode: screen;
         }
 
+        /* Primary Blue Orb */
         .orb-1 {
-            width: 400px;
-            height: 400px;
+            width: 450px;
+            height: 450px;
             background: radial-gradient(circle, #2563eb 0%, #1d4ed8 100%);
             top: -10%;
-            left: -10%;
-            animation: driftAround 22s infinite alternate ease-in-out;
+            left: -5%;
+            animation: driftAround 25s infinite alternate ease-in-out;
         }
 
+        /* Deep Navy base support */
         .orb-2 {
             width: 500px;
             height: 500px;
-            background: radial-gradient(circle, #3b82f6 0%, #1e3a8a 100%);
-            bottom: -15%;
-            right: -10%;
-            animation: driftAround 28s infinite alternate-reverse ease-in-out;
+            background: radial-gradient(circle, #1e3a8a 0%, #0f172a 100%);
+            bottom: -10%;
+            left: -10%;
+            animation: driftAround 30s infinite alternate-reverse ease-in-out;
         }
 
+        /* NEW: Journal Secondary Gold (#F7BC4A) Orb */
         .orb-3 {
-            width: 300px;
-            height: 300px;
-            background: radial-gradient(circle, #60a5fa 0%, #0369a1 100%);
-            top: 40%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            animation: pulseSize 15s infinite alternate ease-in-out;
+            width: 380px;
+            height: 380px;
+            background: radial-gradient(circle, #F7BC4A 0%, #b47b1c 100%);
+            bottom: -15%;
+            right: -5%;
+            opacity: 0.25;
+            animation: pulseSize 18s infinite alternate ease-in-out;
         }
 
         @keyframes driftAround {
             0% { transform: translate(0, 0) scale(1); }
-            50% { transform: translate(60px, 40px) scale(1.15) rotate(45deg); }
-            100% { transform: translate(-40px, 80px) scale(0.9) rotate(-45deg); }
+            50% { transform: translate(50px, 30px) scale(1.1) rotate(30deg); }
+            100% { transform: translate(-30px, 60px) scale(0.95) rotate(-30deg); }
         }
 
         @keyframes pulseSize {
-            0% { transform: translate(-50%, -50%) scale(0.8); opacity: 0.2; }
-            100% { transform: translate(-45%, -45%) scale(1.2); opacity: 0.4; }
+            0% { transform: scale(0.85); opacity: 0.2; }
+            100% { transform: scale(1.15); opacity: 0.35; }
         }
 
         /* --- CORE WRAPPER CARD (GLASSMORPHISM) --- */
@@ -91,15 +94,15 @@
             z-index: 2;
             width: 100%;
             max-width: 440px;
-            background: rgba(13, 18, 35, 0.65);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 24px;
-            padding: 40px 28px;
+            background: rgba(10, 14, 26, 0.7);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            border: 1px solid rgba(255, 255, 255, 0.07);
+            border-radius: 28px;
+            padding: 42px 30px;
             text-align: center;
-            box-shadow: 0 24px 60px rgba(0, 0, 0, 0.4), 
-                        inset 0 1px 1px rgba(255, 255, 255, 0.1);
+            box-shadow: 0 30px 70px rgba(0, 0, 0, 0.5), 
+                        inset 0 1px 1px rgba(255, 255, 255, 0.08);
         }
 
         /* --- PROFILE IDENTIFIER ELEMENTS --- */
@@ -108,9 +111,10 @@
             height: 96px;
             border-radius: 50%;
             object-fit: cover;
-            margin-bottom: 20px;
-            border: 2px solid rgba(59, 130, 246, 0.5);
-            box-shadow: 0 8px 24px rgba(37, 99, 235, 0.25);
+            margin-bottom: 22px;
+            /* Border updated to reflect gold profile accent */
+            border: 2px solid rgba(247, 188, 74, 0.6);
+            box-shadow: 0 8px 24px rgba(247, 188, 74, 0.2);
         }
 
         h1 {
@@ -125,7 +129,7 @@
             font-size: 14px;
             color: #94a3b8;
             font-weight: 400;
-            margin-bottom: 36px;
+            margin-bottom: 38px;
             letter-spacing: 0.2px;
         }
 
@@ -142,33 +146,33 @@
             border-radius: 14px;
             font-weight: 600;
             font-size: 15px;
-            border: 1px solid rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.05);
             transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative;
-            overflow: hidden;
         }
 
-        /* Accent highlighter for the primary portal route */
+        /* Highlighting the Primary Hub with custom gold theme elements */
         .gateway-link.primary-hub {
-            background: linear-gradient(135deg, rgba(37, 99, 235, 0.15) 0%, rgba(29, 78, 216, 0.05) 100%);
-            border: 1px solid rgba(59, 130, 246, 0.3);
-            color: #60a5fa;
+            background: linear-gradient(135deg, rgba(247, 188, 74, 0.12) 0%, rgba(37, 99, 235, 0.03) 100%);
+            border: 1px solid rgba(247, 188, 74, 0.35);
+            color: #f7bc4a;
         }
 
         .gateway-link:hover {
             background: #ffffff;
-            color: #05070f;
+            color: #04060d;
             border-color: #ffffff;
             transform: translateY(-3px);
-            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3), 
-                        0 0 16px rgba(255, 255, 255, 0.1);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4), 
+                        0 0 16px rgba(255, 255, 255, 0.05);
         }
 
+        /* Premium hover transformation using the gold accent color */
         .gateway-link.primary-hub:hover {
-            background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
-            color: #ffffff;
-            border-color: #3b82f6;
-            box-shadow: 0 12px 28px rgba(37, 99, 235, 0.4);
+            background: linear-gradient(135deg, #F7BC4A 0%, #e0a434 100%);
+            color: #04060d;
+            border-color: #F7BC4A;
+            box-shadow: 0 12px 28px rgba(247, 188, 74, 0.35);
         }
 
         .btn-label {
@@ -187,16 +191,22 @@
             transition: transform 0.2s ease;
         }
 
+        /* Subtle gold colored arrow inside the primary button */
+        .primary-hub .arrow-indicator {
+            color: #f7bc4a;
+        }
+
         .gateway-link:hover .arrow-indicator {
             transform: translateX(4px);
             opacity: 1;
+            color: inherit;
         }
 
         /* --- FOOTER REGISTRY LABELS --- */
         .footer-branding {
-            margin-top: 36px;
+            margin-top: 38px;
             font-size: 11px;
-            color: #64748b;
+            color: #57657a;
             letter-spacing: 1.5px;
             text-transform: uppercase;
             font-weight: 600;
@@ -209,7 +219,7 @@
     <div class="bg-background">
         <div class="abstract-orb orb-1"></div>
         <div class="abstract-orb orb-2"></div>
-        <div class="abstract-orb orb-3"></div>
+        <div class="abstract-orb orb-3"></div> <!-- Infused with gold parameters -->
     </div>
 
     <!-- UI Presentational Layer -->
@@ -222,7 +232,7 @@
         <a href="https://jurnalfkipuntad.com/index.php/elts/" class="gateway-link primary-hub" target="_blank">
             <span class="btn-label">
                 <span class="btn-icon-prefix">🌐</span>
-                <span>Official OJS Homepage e-Journal of ELTS</span>
+                <span>Official OJS Journal Homepage</span>
             </span>
             <span class="arrow-indicator">➔</span>
         </a>
