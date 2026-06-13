@@ -1,198 +1,86 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Forwarding to e-Journal of ELTS...</title>
-  
-  <link rel="icon" type="image/png" href="https://lh3.googleusercontent.com/d/1DFe5cEnERQ2qhUl8zHS27wG_fzZS1Mxg">
-  
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=Georgia:ital,wght=0,400;0,700;1,400&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-  <style>
-    :root {
-      --bg-space: #07121e;
-      --panel-dark: #0d1b2a;
-      --elts-blue: #1c74e8;
-      --text-main: #f4f7fc;
-      --text-muted: #94a3b8;
-      --border-glow: rgba(28, 116, 232, 0.2);
-    }
-
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    
-    body {
-      font-family: 'IBM Plex Sans', sans-serif;
-      background-color: var(--bg-space);
-      color: var(--text-main);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 100vh;
-      overflow: hidden;
-    }
-
-    .redirect-container {
-      text-align: center;
-      max-width: 450px;
-      padding: 40px;
-      background: var(--panel-dark);
-      border-radius: 16px;
-      box-shadow: 0 20px 50px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.05);
-      position: relative;
-    }
-
-    /* BRANDING */
-    .journal-logo {
-      height: 70px;
-      width: auto;
-      margin-bottom: 20px;
-      animation: pulseLogo 2s ease-in-out infinite;
-    }
-
-    .title {
-      font-family: 'Georgia', serif;
-      font-size: 1.5rem;
-      font-weight: bold;
-      margin-bottom: 8px;
-    }
-
-    .subtitle {
-      font-size: 0.85rem;
-      color: var(--text-muted);
-      text-transform: uppercase;
-      letter-spacing: 1.5px;
-      margin-bottom: 35px;
-    }
-
-    /* HIGH TECH ROUTING ANIMATION */
-    .routing-animation {
-      position: relative;
-      width: 100%;
-      height: 60px;
-      margin-bottom: 35px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 20px;
-    }
-
-    .node {
-      width: 45px;
-      height: 45px;
-      border-radius: 50%;
-      background: #112240;
-      border: 2px solid var(--text-muted);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.1rem;
-      z-index: 2;
-    }
-
-    .node-source {
-      border-color: var(--elts-blue);
-      color: var(--elts-blue);
-      box-shadow: 0 0 15px var(--border-glow);
-    }
-
-    .node-target {
-      border-color: #34d399;
-      color: #34d399;
-      animation: pulseTarget 1.5s infinite alternate;
-    }
-
-    .data-stream-line {
-      position: absolute;
-      left: 65px;
-      right: 65px;
-      height: 2px;
-      background: rgba(255,255,255,0.1);
-      z-index: 1;
-    }
-
-    .data-pulse {
-      position: absolute;
-      width: 12px;
-      height: 12px;
-      border-radius: 50%;
-      background: var(--elts-blue);
-      box-shadow: 0 0 12px var(--elts-blue);
-      left: 65px;
-      animation: streamPass 1.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
-    }
-
-    /* FOOTER TICKER */
-    .ticker {
-      font-family: monospace;
-      font-size: 0.8rem;
-      color: #34d399;
-      letter-spacing: 0.5px;
-      min-height: 20px;
-    }
-
-    .manual-link {
-      display: inline-block;
-      margin-top: 25px;
-      font-size: 0.8rem;
-      color: var(--text-muted);
-      text-decoration: none;
-      transition: color 0.2s;
-    }
-    .manual-link a { color: var(--elts-blue); text-decoration: none; }
-    .manual-link a:hover { text-decoration: underline; }
-
-    /* ANIMATIONS */
-    @keyframes pulseLogo {
-      0%, 100% { transform: scale(1); opacity: 1; }
-      50% { transform: scale(1.04); opacity: 0.9; }
-    }
-    @keyframes pulseTarget {
-      0% { box-shadow: 0 0 0px rgba(52, 211, 153, 0); }
-      100% { box-shadow: 0 0 15px rgba(52, 211, 153, 0.4); }
-    }
-    @keyframes streamPass {
-      0% { left: 55px; background: var(--elts-blue); box-shadow: 0 0 12px var(--elts-blue); }
-      100% { left: calc(100% - 65px); background: #34d399; box-shadow: 0 0 12px #34d399; }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>e-Journal of ELTS - Official Directory</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background-color: #0b0f19; /* Dark elegant background matching portal */
+            color: #ffffff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+        }
+        .profile-container {
+            text-align: center;
+            max-width: 450px;
+            width: 100%;
+        }
+        .logo-placeholder {
+            width: 90px;
+            height: 90px;
+            background: linear-gradient(135deg, #1e3a8a, #3b82f6);
+            border-radius: 50%;
+            margin: 0 auto 15px auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 24px;
+            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+        }
+        h1 { font-size: 22px; margin-bottom: 5px; color: #f3f4f6; }
+        p { font-size: 14px; color: #9ca3af; margin-bottom: 30px; }
+        
+        .link-button {
+            display: block;
+            background-color: #1f2937;
+            color: #ffffff;
+            text-decoration: none;
+            padding: 16px;
+            margin-bottom: 12px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 15px;
+            border: 1px solid #374151;
+            transition: all 0.2s ease-in-out;
+            text-align: center;
+        }
+        .link-button:hover {
+            background-color: #2563eb;
+            border-color: #3b82f6;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
+        }
+        .footer {
+            margin-top: 40px;
+            font-size: 11px;
+            color: #4b5563;
+            letter-spacing: 1px;
+        }
+    </style>
 </head>
 <body>
 
-  <div class="redirect-container">
-    <img src="https://lh3.googleusercontent.com/d/1DFe5cEnERQ2qhUl8zHS27wG_fzZS1Mxg" alt="ELTS Logo" class="journal-logo">
+    <div class="profile-container">
+        <div class="logo-placeholder">ELTS</div>
+        <h1>e-Journal of ELTS</h1>
+        <p>English Language Teaching Society Portal</p>
+
+        <!-- Dynamic Gateway Buttons -->
+        <a href="https://jurnalfkipuntad.com/index.php/elts/" class="link-button" target="_blank">🌐 Official OJS Journal Homepage</a>
+        <a href="YOUR_GOOGLE_FORM_FOR_INVOICES_HERE" class="link-button" target="_blank">📄 Auto-Generate APC Invoice</a>
+        <a href="YOUR_GOOGLE_FORM_FOR_RECEIPTS_HERE" class="link-button" target="_blank">💳 Submit Payment Receipt Claim</a>
+        <a href="https://eltsjournal.github.io/verifportal" class="link-button">🛡️ Document Verification Portal</a>
     
-    <div class="title">e-Journal of ELTS</div>
-    <div class="subtitle">Official Gateway Routing</div>
-
-    <div class="routing-animation">
-      <div class="node node-source"><i class="fas fa-network-wired"></i></div>
-      <div class="data-stream-line"></div>
-      <div class="data-pulse"></div>
-      <div class="node node-target"><i class="fas fa-globe"></i></div>
+        <div class="footer">© 2026 E-JOURNAL OF ELTS</div>
     </div>
 
-    <div id="ticker-text" class="ticker">SECURE HANDSHAKE INITIALIZED...</div>
-
-    <div class="manual-link">
-      Taking too long? <a href="https://jurnalfkipuntad.com/index.php/elts/">Click here to bypass</a>.
-    </div>
-  </div>
-
-  <script type="text/javascript">
-    const TARGET_URL = "https://jurnalfkipuntad.com/index.php/elts/";
-    const ticker = document.getElementById("ticker-text");
-
-    // Dynamic text changes to make the wait
-    setTimeout(() => { ticker.innerText = "RESOLVING HOST DOMAIN METRICS..."; }, 800);
-    setTimeout(() => { ticker.innerText = "AUTHORIZING SECURE TRANSIT PROTOCOL..."; }, 1600);
-    setTimeout(() => { ticker.innerText = "HANDOFF COMPLETE. REDIRECTING..."; }, 2400);
-
-    // Final execution redirect after exactly 3 seconds
-    setTimeout(() => {
-      window.location.replace(TARGET_URL);
-    }, 3000);
-  </script>
 </body>
 </html>
