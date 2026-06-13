@@ -3,83 +3,255 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>e-Journal of ELTS - Official Directory</title>
+    <title>e-Journal of ELTS - Directory</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
-        body {
-            font-family: 'Segoe UI', Arial, sans-serif;
-            background-color: #0b0f19; /* Dark elegant background matching portal */
-            color: #ffffff;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
+        * {
+            box-sizing: border-box;
             margin: 0;
-            padding: 20px;
+            padding: 0;
         }
-        .profile-container {
-            text-align: center;
-            max-width: 450px;
-            width: 100%;
-        }
-        .logo-placeholder {
-            width: 90px;
-            height: 90px;
-            background: linear-gradient(135deg, #1e3a8a, #3b82f6);
-            border-radius: 50%;
-            margin: 0 auto 15px auto;
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #05070f;
+            color: #ffffff;
+            min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-weight: bold;
-            font-size: 24px;
-            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+            padding: 24px 16px;
+            overflow-x: hidden;
+            position: relative;
         }
-        h1 { font-size: 22px; margin-bottom: 5px; color: #f3f4f6; }
-        p { font-size: 14px; color: #9ca3af; margin-bottom: 30px; }
-        
-        .link-button {
-            display: block;
-            background-color: #1f2937;
+
+        /* --- ABSTRACT ANIMATED BACKDROP LAYER --- */
+        .bg-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .abstract-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(120px);
+            opacity: 0.35;
+            mix-blend-mode: screen;
+        }
+
+        .orb-1 {
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, #2563eb 0%, #1d4ed8 100%);
+            top: -10%;
+            left: -10%;
+            animation: driftAround 22s infinite alternate ease-in-out;
+        }
+
+        .orb-2 {
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, #3b82f6 0%, #1e3a8a 100%);
+            bottom: -15%;
+            right: -10%;
+            animation: driftAround 28s infinite alternate-reverse ease-in-out;
+        }
+
+        .orb-3 {
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, #60a5fa 0%, #0369a1 100%);
+            top: 40%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation: pulseSize 15s infinite alternate ease-in-out;
+        }
+
+        @keyframes driftAround {
+            0% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(60px, 40px) scale(1.15) rotate(45deg); }
+            100% { transform: translate(-40px, 80px) scale(0.9) rotate(-45deg); }
+        }
+
+        @keyframes pulseSize {
+            0% { transform: translate(-50%, -50%) scale(0.8); opacity: 0.2; }
+            100% { transform: translate(-45%, -45%) scale(1.2); opacity: 0.4; }
+        }
+
+        /* --- CORE WRAPPER CARD (GLASSMORPHISM) --- */
+        .directory-card {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            max-width: 440px;
+            background: rgba(13, 18, 35, 0.65);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 24px;
+            padding: 40px 28px;
+            text-align: center;
+            box-shadow: 0 24px 60px rgba(0, 0, 0, 0.4), 
+                        inset 0 1px 1px rgba(255, 255, 255, 0.1);
+        }
+
+        /* --- PROFILE IDENTIFIER ELEMENTS --- */
+        .journal-logo {
+            width: 96px;
+            height: 96px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 20px;
+            border: 2px solid rgba(59, 130, 246, 0.5);
+            box-shadow: 0 8px 24px rgba(37, 99, 235, 0.25);
+        }
+
+        h1 {
+            font-size: 24px;
+            font-weight: 700;
             color: #ffffff;
+            margin-bottom: 6px;
+            letter-spacing: -0.5px;
+        }
+
+        .subtitle {
+            font-size: 14px;
+            color: #94a3b8;
+            font-weight: 400;
+            margin-bottom: 36px;
+            letter-spacing: 0.2px;
+        }
+
+        /* --- HIGH-CONTRAST ACTION BUTTONS --- */
+        .gateway-link {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: rgba(255, 255, 255, 0.04);
+            color: #f1f5f9;
             text-decoration: none;
-            padding: 16px;
-            margin-bottom: 12px;
-            border-radius: 8px;
+            padding: 18px 24px;
+            margin-bottom: 14px;
+            border-radius: 14px;
             font-weight: 600;
             font-size: 15px;
-            border: 1px solid #374151;
-            transition: all 0.2s ease-in-out;
-            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
         }
-        .link-button:hover {
-            background-color: #2563eb;
+
+        /* Accent highlighter for the primary portal route */
+        .gateway-link.primary-hub {
+            background: linear-gradient(135deg, rgba(37, 99, 235, 0.15) 0%, rgba(29, 78, 216, 0.05) 100%);
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            color: #60a5fa;
+        }
+
+        .gateway-link:hover {
+            background: #ffffff;
+            color: #05070f;
+            border-color: #ffffff;
+            transform: translateY(-3px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3), 
+                        0 0 16px rgba(255, 255, 255, 0.1);
+        }
+
+        .gateway-link.primary-hub:hover {
+            background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+            color: #ffffff;
             border-color: #3b82f6;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
+            box-shadow: 0 12px 28px rgba(37, 99, 235, 0.4);
         }
-        .footer {
-            margin-top: 40px;
+
+        .btn-label {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .btn-icon-prefix {
+            font-size: 18px;
+        }
+
+        .arrow-indicator {
+            font-size: 12px;
+            opacity: 0.6;
+            transition: transform 0.2s ease;
+        }
+
+        .gateway-link:hover .arrow-indicator {
+            transform: translateX(4px);
+            opacity: 1;
+        }
+
+        /* --- FOOTER REGISTRY LABELS --- */
+        .footer-branding {
+            margin-top: 36px;
             font-size: 11px;
-            color: #4b5563;
-            letter-spacing: 1px;
+            color: #64748b;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            font-weight: 600;
         }
     </style>
 </head>
 <body>
 
-    <div class="profile-container">
-        <div class="logo-placeholder">ELTS</div>
-        <h1>e-Journal of ELTS</h1>
-        <p>English Language Teaching Society Portal</p>
+    <!-- Ambient Animated Backdrop Elements -->
+    <div class="bg-background">
+        <div class="abstract-orb orb-1"></div>
+        <div class="abstract-orb orb-2"></div>
+        <div class="abstract-orb orb-3"></div>
+    </div>
 
-        <!-- Dynamic Gateway Buttons -->
-        <a href="https://jurnalfkipuntad.com/index.php/elts/" class="link-button" target="_blank">🌐 Official OJS Journal Homepage</a>
-        <a href="YOUR_GOOGLE_FORM_FOR_INVOICES_HERE" class="link-button" target="_blank">📄 Auto-Generate APC Invoice</a>
-        <a href="YOUR_GOOGLE_FORM_FOR_RECEIPTS_HERE" class="link-button" target="_blank">💳 Submit Payment Receipt Claim</a>
-        <a href="https://eltsjournal.github.io/verifportal" class="link-button">🛡️ Document Verification Portal</a>
+    <!-- UI Presentational Layer -->
+    <div class="directory-card">
+        <img src="https://lh3.googleusercontent.com/d/1DFe5cEnERQ2qhUl8zHS27wG_fzZS1Mxg" alt="ELTS Logo" class="journal-logo">
+        <h1>e-Journal of ELTS</h1>
+        <div class="subtitle">English Language Teaching Society Portal</div>
+
+        <!-- Directory Buttons Grid -->
+        <a href="https://jurnalfkipuntad.com/index.php/elts/" class="gateway-link primary-hub" target="_blank">
+            <span class="btn-label">
+                <span class="btn-icon-prefix">🌐</span>
+                <span>Official OJS Home Journal</span>
+            </span>
+            <span class="arrow-indicator">➔</span>
+        </a>
+
+        <a href="https://forms.gle/PyeuBs3EPjvaC4rU7" class="gateway-link" target="_blank">
+            <span class="btn-label">
+                <span class="btn-icon-prefix">📄</span>
+                <span>Request APC Invoice</span>
+            </span>
+            <span class="arrow-indicator">➔</span>
+        </a>
+
+        <a href="https://forms.gle/GmnZXhn8HhMb1Snp6" class="gateway-link" target="_blank">
+            <span class="btn-label">
+                <span class="btn-icon-prefix">💳</span>
+                <span>Submit Payment Receipt</span>
+            </span>
+            <span class="arrow-indicator">➔</span>
+        </a>
+
+        <a href="https://eltsjournal.github.io/verifportal" class="gateway-link">
+            <span class="btn-label">
+                <span class="btn-icon-prefix">🛡️</span>
+                <span>Document Verification Portal</span>
+            </span>
+            <span class="arrow-indicator">➔</span>
+        </a>
     
-        <div class="footer">© 2026 E-JOURNAL OF ELTS</div>
+        <div class="footer-branding">© 2026 e-Journal of ELTS</div>
     </div>
 
 </body>
