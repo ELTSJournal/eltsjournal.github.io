@@ -221,8 +221,9 @@
             border: 1px solid rgba(255, 255, 255, 0.06);
             transition: all 0.22s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative;
-            /* Stops text from wrapping awkwardly */
             gap: 12px;
+            /* Override card's inherited center-align — buttons are left-aligned */
+            text-align: left;
         }
 
         /* CHANGED: hover → bright blue instead of whitish */
@@ -274,6 +275,7 @@
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
+            text-align: left;
         }
 
         .arrow-indicator {
